@@ -1,6 +1,6 @@
 name: Devops CI Pipeline
 
-om:
+on:
   push:
     branches:
       - main
