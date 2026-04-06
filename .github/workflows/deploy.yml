@@ -1,0 +1,25 @@
+name: Deploy to VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Connect and Deploy
+        uses: appleboy/ssh-action@v1.0.0
+
+        with:
+          host: 4.155.36.217
+          username: YOUR_VM_USERNAME
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          script: |
+            cd ~/devops-practice
+            git pull
+            docker-compose down
+            docker-compose up -d --build
